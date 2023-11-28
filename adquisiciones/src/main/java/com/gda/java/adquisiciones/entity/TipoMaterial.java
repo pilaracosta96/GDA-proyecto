@@ -27,11 +27,21 @@ public class TipoMaterial {
 
     // Métodos getters y setters
 
+    public String getNombreTipoMaterial() {
+        return nombreTipoMaterial;
+    }
+
+    public void setNombreTipoMaterial(String nombreTipoMaterial) {
+        this.nombreTipoMaterial = nombreTipoMaterial;
+    }
+
     public Long getIdTipoMaterial() {
+
         return id;
     }
 
     public void setIdTipoMaterial(Long idTipoMaterial) {
+
         this.id = idTipoMaterial;
     }
 }

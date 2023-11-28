@@ -33,8 +33,8 @@ public class BibliografiaService {
             final String apellidoAutor = bibliografiaDTO.getApellidoAutor();
             final Integer anioPublicacion = bibliografiaDTO.getAnioPublicacion();
             final String nombreEditorial = String.valueOf(bibliografiaDTO.getEditorial());
-            final String isbn = String.valueOf(bibliografiaDTO.getIsbn());
-            final String issn = String.valueOf(bibliografiaDTO.getIssn());
+            final Long isbn = bibliografiaDTO.getIsbn();
+            final Long issn = bibliografiaDTO.getIssn();
             final double monto = bibliografiaDTO.getMonto();
             final String nombreTipoMaterial = String.valueOf(bibliografiaDTO.getTipoMaterial());
 

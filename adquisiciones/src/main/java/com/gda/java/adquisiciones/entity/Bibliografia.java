@@ -45,14 +45,14 @@ public class Bibliografia {
     private TipoMaterial tipoMaterial;
 
     public Bibliografia(String titulo, String nombreAutor, String apellidoAutor, int anioPublicacion,
-                        Editorial editorial, String isbn, String issn, double monto, TipoMaterial tipoMaterial) {
+                        Editorial editorial, Long isbn, Long issn, double monto, TipoMaterial tipoMaterial) {
         this.titulo = titulo;
         this.nombreAutor = nombreAutor;
         this.apellidoAutor = apellidoAutor;
         this.anioPublicacion = anioPublicacion;
         this.editorial = editorial;
-        this.isbn = Long.parseLong(isbn);
-        this.issn = Long.parseLong(issn);
+        this.isbn = isbn;
+        this.issn = issn;
         this.monto = (float) monto;
         this.tipoMaterial = tipoMaterial;
     }
