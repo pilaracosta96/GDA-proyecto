@@ -1,5 +1,6 @@
 package com.gda.java.adquisiciones.dto;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.gda.java.adquisiciones.entity.Editorial;
@@ -9,7 +10,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class BibliografiaDTO {
     private String titulo;
     private String nombreAutor;
