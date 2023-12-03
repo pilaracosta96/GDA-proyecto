@@ -14,14 +14,22 @@ public class EditorialService {
 
     @Autowired
     public EditorialService(EditorialRepository editorialRepository) {
+
         this.editorialRepository = editorialRepository;
     }
 
     public Optional<Editorial> buscarPorId(Long id) {
+
         return editorialRepository.findById(id);
     }
 
     public Editorial guardar(Editorial editorial) {
+
         return editorialRepository.save(editorial);
+    }
+
+    public Optional<Editorial> buscarPorNombre(String nombreEditorial){
+
+        return editorialRepository.findByNombreEditorial(nombreEditorial);
     }
 }

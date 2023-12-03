@@ -44,14 +44,19 @@ public class BibliografiaController {
     }
 
     @GetMapping("/apellidoAutor/{apellidoAutor}")
-    public ResponseEntity<Bibliografia> buscarPorApellidoAutor(@PathVariable String apellidoAutor) {
-        Optional<Bibliografia> bibliografia = bibliografiaService.buscarPorApellidoAutor(apellidoAutor);
-        return bibliografia.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<List<Bibliografia>> buscarPorApellidoAutor(@PathVariable String apellidoAutor) {
+        return ResponseEntity.ok(bibliografiaService.buscarPorApellidoAutor(apellidoAutor));
+
     }
 
     @GetMapping("/listar")
     public ResponseEntity<List<Bibliografia>> listarTodas() {
         return ResponseEntity.ok(bibliografiaService.listarTodas());
+    }
+    @GetMapping("/editorial/{nombreEditorial}")
+    public ResponseEntity<List<Bibliografia>> buscarNombreEditorial(@PathVariable String nombreEditorial) {
+        List<Bibliografia> bibliografias = bibliografiaService.buscarNombreEditorial(nombreEditorial);
+        return ResponseEntity.ok(bibliografias);
     }
 
     }
