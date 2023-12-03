@@ -28,7 +28,7 @@ public class Bibliografia {
     private Integer anioPublicacion;
 
     @ManyToOne
-    @JoinColumn(name = "id_editorial")
+    @JoinColumn(name = "editorial")
     private Editorial editorial;
 
     @Column(name = "isbn")
@@ -41,7 +41,7 @@ public class Bibliografia {
     private Float monto;
 
     @ManyToOne
-    @JoinColumn(name = "id_tipo_material")
+    @JoinColumn(name = "tipo_material")
     private TipoMaterial tipoMaterial;
 
     public Bibliografia(String titulo, String nombreAutor, String apellidoAutor, int anioPublicacion,
