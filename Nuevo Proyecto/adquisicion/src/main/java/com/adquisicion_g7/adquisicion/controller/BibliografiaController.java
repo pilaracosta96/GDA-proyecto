@@ -1,10 +1,8 @@
-package com.adquisicion_g7.adquisicion.controllers;
+package com.adquisicion_g7.adquisicion.controller;
 
 import com.adquisicion_g7.adquisicion.dto.BibliografiaDTO;
 import com.adquisicion_g7.adquisicion.entities.Bibliografia;
-import com.adquisicion_g7.adquisicion.entities.Editorial;
 import com.adquisicion_g7.adquisicion.service.BibliografiaService;
-import com.adquisicion_g7.adquisicion.service.EditorialService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 

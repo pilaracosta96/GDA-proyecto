@@ -3,8 +3,10 @@ package com.adquisicion_g7.adquisicion.service;
 import com.adquisicion_g7.adquisicion.dto.BibliografiaDTO;
 import com.adquisicion_g7.adquisicion.entities.Bibliografia;
 import com.adquisicion_g7.adquisicion.entities.Editorial;
+import com.adquisicion_g7.adquisicion.entities.TipoMaterial;
 import com.adquisicion_g7.adquisicion.repository.BibliografiaRepository;
 import com.adquisicion_g7.adquisicion.repository.EditorialRepository;
+import com.adquisicion_g7.adquisicion.repository.TipoMaterialRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,16 +21,27 @@ public class BibliografiaService {
     private final BibliografiaRepository bibliografiaRepository;
     private final EditorialRepository editorialRepository;
 
+    private final TipoMaterialRepository tipoMaterialRepository;
+
+
     @Autowired
-    public BibliografiaService(BibliografiaRepository bibliografiaRepository, EditorialRepository editorialRepository) {
+    public BibliografiaService(BibliografiaRepository bibliografiaRepository, EditorialRepository editorialRepository, TipoMaterialRepository tipoMaterialRepository) {
         this.bibliografiaRepository = bibliografiaRepository;
         this.editorialRepository = editorialRepository;
+        this.tipoMaterialRepository = tipoMaterialRepository;
     }
     @Transactional
     public Bibliografia guardarBibliografia(BibliografiaDTO bibliografiaDTO) {
         String nombreEditorial = bibliografiaDTO.getEditorial().toUpperCase();
+        String nombretipoMaterial = bibliografiaDTO.getTipoMaterial().toUpperCase();
         Optional<Editorial> editorialOptional = editorialRepository.findByNombreEditorial(nombreEditorial);
+        TipoMaterial tipoMaterial = new TipoMaterial(null, nombretipoMaterial);
+        tipoMaterialRepository.save(tipoMaterial);
+
+
         Bibliografia nuevaBibliografia = convertirDtoAEntidad(bibliografiaDTO);
+        nuevaBibliografia.setTipoMaterial(tipoMaterial);
+
         if (editorialOptional.isEmpty()){
             Editorial nuevaEditorial = new Editorial(nombreEditorial);
             editorialRepository.save(nuevaEditorial);
@@ -39,6 +52,8 @@ public class BibliografiaService {
         nuevaBibliografia.setEditorial(editorialOptional.get());
         return bibliografiaRepository.save(nuevaBibliografia);
     }
+
+
 
     private Bibliografia convertirDtoAEntidad(BibliografiaDTO bibliografiaDTO) {
         Bibliografia bibliografia = new Bibliografia();
