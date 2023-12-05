@@ -10,8 +10,7 @@ import com.adquisicion_g7.adquisicion.repository.TipoMaterialRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
+
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -35,6 +34,27 @@ public class BibliografiaService {
     public Bibliografia guardarBibliografia(BibliografiaDTO bibliografiaDTO) {
         String nombreEditorial = bibliografiaDTO.getEditorial().toUpperCase();
         String nombreTipoMaterial = bibliografiaDTO.getTipoMaterial().toUpperCase();
+
+        // Verificar y guardar el Tipo de Material
+        TipoMaterial tipoMaterial = tipoMaterialRepository.findByNombreTipoMaterial(nombreTipoMaterial)
+                .orElseGet(() -> tipoMaterialRepository.save(new TipoMaterial(null, nombreTipoMaterial)));
+
+        // Verificar y guardar la Editorial
+        Editorial editorial = editorialRepository.findByNombreEditorial(nombreEditorial)
+                .orElseGet(() -> editorialRepository.save(new Editorial(nombreEditorial)));
+
+        // Crear la nueva Bibliografía y asignarle la Editorial y el Tipo de Material
+        Bibliografia nuevaBibliografia = convertirDtoAEntidad(bibliografiaDTO);
+        nuevaBibliografia.setEditorial(editorial);
+        nuevaBibliografia.setTipoMaterial(tipoMaterial);
+
+        // Guardar la Bibliografía
+        return bibliografiaRepository.save(nuevaBibliografia);
+    }
+
+    /*public Bibliografia guardarBibliografia(BibliografiaDTO bibliografiaDTO) {
+        String nombreEditorial = bibliografiaDTO.getEditorial().toUpperCase();
+        String nombreTipoMaterial = bibliografiaDTO.getTipoMaterial().toUpperCase();
         Optional<Editorial> editorialOptional = editorialRepository.findByNombreEditorial(nombreEditorial);
         TipoMaterial tipoMaterial = new TipoMaterial(null,nombreTipoMaterial);
         tipoMaterialRepository.save(tipoMaterial);
@@ -52,7 +72,7 @@ public class BibliografiaService {
         nuevaBibliografia.setEditorial(editorialOptional.get());
 
         return bibliografiaRepository.save(nuevaBibliografia);
-    }
+    }*/
 
     private Bibliografia convertirDtoAEntidad(BibliografiaDTO bibliografiaDTO) {
         Bibliografia bibliografia = new Bibliografia();

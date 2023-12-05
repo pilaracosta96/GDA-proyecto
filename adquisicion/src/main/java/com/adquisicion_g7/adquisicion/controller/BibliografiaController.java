@@ -32,7 +32,7 @@ public class BibliografiaController {
         return ResponseEntity.ok(bibliografiaService.guardarBibliografia(bibliografiaDTO));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/borrar/{id}")
     public ResponseEntity<Void> removerBibliografia(@PathVariable Long id) {
         bibliografiaService.removerBibliografia(id);
         return ResponseEntity.noContent().build();
