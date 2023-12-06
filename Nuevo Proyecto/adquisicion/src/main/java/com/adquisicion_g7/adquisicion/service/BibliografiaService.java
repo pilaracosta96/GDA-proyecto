@@ -109,7 +109,7 @@ public class BibliografiaService {
     public MensajeDTO buscarPorTitulo(String titulo) {
         List<Bibliografia> bibliografias = bibliografiaRepository.findByTitulo(titulo);
 
-        if (!bibliografias.isEmpty()) {
+        if (!bibliografias.isEmpty()) {;
             String mensaje = "Bibliografía encontrada con el título: " + titulo;
             return new MensajeDTO(mensaje);
         } else {
