@@ -23,6 +23,6 @@ public interface BibliografiaRepository extends JpaRepository<Bibliografia, Long
 
 
     Optional<Bibliografia> findByIsbnAndEliminadaTrue(Long isbn);
-}   List<Bibliografia> findByEditorial(Editorial editorial);
+    List<Bibliografia> findByEditorial(Editorial editorial);
 
 }

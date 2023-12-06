@@ -32,7 +32,7 @@ public class BibliografiaService {
         this.tipoMaterialRepository = tipoMaterialRepository;
     }
     @Transactional
-    public Bibliografia guardarBibliografia(BibliografiaDTO bibliografiaDTO) {
+    public MensajeDTO guardarBibliografia(BibliografiaDTO bibliografiaDTO) {
         String nombreEditorial = bibliografiaDTO.getEditorial().toUpperCase();
         String nombreTipoMaterial = bibliografiaDTO.getTipoMaterial().toUpperCase();
 
@@ -50,7 +50,8 @@ public class BibliografiaService {
         nuevaBibliografia.setTipoMaterial(tipoMaterial);
 
         // Guardar la Bibliografía
-        return bibliografiaRepository.save(nuevaBibliografia);
+        bibliografiaRepository.save(nuevaBibliografia);
+        return new MensajeDTO("Bibliografía guardada correctamente.");
     }
 
     /*public Bibliografia guardarBibliografia(BibliografiaDTO bibliografiaDTO) {
