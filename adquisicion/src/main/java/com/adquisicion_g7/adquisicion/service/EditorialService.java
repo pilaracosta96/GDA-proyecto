@@ -14,7 +14,6 @@ public class EditorialService {
 
     @Autowired
     public EditorialService(EditorialRepository editorialRepository) {
-
         this.editorialRepository = editorialRepository;
     }
 
