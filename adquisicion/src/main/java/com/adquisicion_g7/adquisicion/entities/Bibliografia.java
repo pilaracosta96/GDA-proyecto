@@ -15,13 +15,7 @@ import lombok.Setter;
 @Table(name = "bibliografia")
 public class Bibliografia {
     @Id
-    /*@SequenceGenerator(name = "bibliografia_sequence",
-                        sequenceName = "bibliografia_sequence",
-                        allocationSize = 1
-     )
-    @GeneratedValue(strategy = SEQUENCE,
-                generator = "bibliografia_sequence"
-    )*/
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -52,7 +46,7 @@ public class Bibliografia {
     private Float monto;
 
     @Column(name = "eliminada")
-    private boolean eliminada;
+    private Boolean eliminada;
 
     //@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

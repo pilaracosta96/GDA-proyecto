@@ -1,6 +1,7 @@
 package com.adquisicion_g7.adquisicion.service;
 
 import com.adquisicion_g7.adquisicion.dto.BibliografiaDTO;
+import com.adquisicion_g7.adquisicion.dto.MensajeDTO;
 import com.adquisicion_g7.adquisicion.entities.Bibliografia;
 import com.adquisicion_g7.adquisicion.entities.Editorial;
 import com.adquisicion_g7.adquisicion.entities.TipoMaterial;
@@ -31,9 +32,19 @@ public class BibliografiaService {
         this.tipoMaterialRepository = tipoMaterialRepository;
     }
     @Transactional
-    public Bibliografia guardarBibliografia(BibliografiaDTO bibliografiaDTO) {
+    public MensajeDTO guardarBibliografia(BibliografiaDTO bibliografiaDTO) {
         String nombreEditorial = bibliografiaDTO.getEditorial().toUpperCase();
         String nombreTipoMaterial = bibliografiaDTO.getTipoMaterial().toUpperCase();
+        Long isbn = bibliografiaDTO.getIsbn();
+
+        // Verificar ISBN
+        Optional<Bibliografia> bibliografiaOptional = bibliografiaRepository.findByIsbn(isbn);
+        if (bibliografiaOptional.isPresent()) {
+            String mensaje = "ISBN " + isbn + " ya existe en la base de datos";
+            return new MensajeDTO(mensaje);
+        }
+
+
 
         // Verificar y guardar el Tipo de Material
         TipoMaterial tipoMaterial = tipoMaterialRepository.findByNombreTipoMaterial(nombreTipoMaterial)
@@ -47,32 +58,14 @@ public class BibliografiaService {
         Bibliografia nuevaBibliografia = convertirDtoAEntidad(bibliografiaDTO);
         nuevaBibliografia.setEditorial(editorial);
         nuevaBibliografia.setTipoMaterial(tipoMaterial);
+        nuevaBibliografia.setEliminada(false);
 
         // Guardar la Bibliografía
-        return bibliografiaRepository.save(nuevaBibliografia);
+        bibliografiaRepository.save(nuevaBibliografia);
+        return new MensajeDTO("Bibliografía guardada correctamente");
     }
 
-    /*public Bibliografia guardarBibliografia(BibliografiaDTO bibliografiaDTO) {
-        String nombreEditorial = bibliografiaDTO.getEditorial().toUpperCase();
-        String nombreTipoMaterial = bibliografiaDTO.getTipoMaterial().toUpperCase();
-        Optional<Editorial> editorialOptional = editorialRepository.findByNombreEditorial(nombreEditorial);
-        TipoMaterial tipoMaterial = new TipoMaterial(null,nombreTipoMaterial);
-        tipoMaterialRepository.save(tipoMaterial);
 
-        Bibliografia nuevaBibliografia = convertirDtoAEntidad(bibliografiaDTO);
-        nuevaBibliografia.setTipoMaterial(tipoMaterial);
-
-        if (editorialOptional.isEmpty()){
-            Editorial nuevaEditorial = new Editorial(nombreEditorial);
-            editorialRepository.save(nuevaEditorial);
-            nuevaBibliografia.setEditorial(nuevaEditorial);
-            return bibliografiaRepository.save(nuevaBibliografia);
-        }
-
-        nuevaBibliografia.setEditorial(editorialOptional.get());
-
-        return bibliografiaRepository.save(nuevaBibliografia);
-    }*/
 
     private Bibliografia convertirDtoAEntidad(BibliografiaDTO bibliografiaDTO) {
         Bibliografia bibliografia = new Bibliografia();
@@ -83,6 +76,7 @@ public class BibliografiaService {
         bibliografia.setIsbn(bibliografiaDTO.getIsbn());
         bibliografia.setIssn(bibliografiaDTO.getIssn());
         bibliografia.setMonto(bibliografiaDTO.getMonto());
+        bibliografia.setEliminada(false);
 
         return bibliografia;
     }
@@ -92,8 +86,15 @@ public class BibliografiaService {
         bibliografiaRepository.deleteById(id);
     }
 
-    public List<Bibliografia> buscarPorTitulo(String titulo) {
-        return bibliografiaRepository.findByTitulo(titulo);
+    public MensajeDTO buscarPorTitulo(String titulo) {
+        List<Bibliografia> bibliografias = bibliografiaRepository.findByTitulo(titulo);
+        if (!bibliografias.isEmpty()){
+            String mensaje = "Bibliografía encontrada con el título: " + titulo;
+            return new MensajeDTO(mensaje);
+        } else {
+            String mensaje = "No se encontró bibliografía con el título: " + titulo;
+            return new MensajeDTO(mensaje);
+        }
     }
 
     public List<Bibliografia> buscarPorApellidoAutor(String apellidoAutor) {
@@ -101,29 +102,44 @@ public class BibliografiaService {
     }
 
     public List<Bibliografia> listarTodas() {
-        return bibliografiaRepository.findAll();
+        return bibliografiaRepository.findAllByEliminada(false);
     }
 
-    public List<Bibliografia> buscarNombreEditorial(String nombreEditorial) {
+
+    public MensajeDTO buscarNombreEditorial(String nombreEditorial) {
         Optional<Editorial> editorialOptional = editorialRepository.findByNombreEditorial(nombreEditorial);
 
         if (editorialOptional.isPresent()) {
             Editorial editorial = editorialOptional.get();
-            return bibliografiaRepository.findByEditorial(editorial);
+            String mensaje = " La editorial " + nombreEditorial + " existe en la base.";
+            return new MensajeDTO(mensaje);
+        }else {
+            String mensaje = "No se encontró la editorial " + nombreEditorial;
+            return new MensajeDTO(mensaje);
         }
 
-        throw new NoSuchElementException("La editorial no existe");
     }
-    /*public Optional<Editorial> buscarNombreEditorial(String nombreEditorial) {
-        Optional<Editorial> editorialOptional = editorialRepository.findByNombreEditorial(nombreEditorial);
+@Transactional
+    public MensajeDTO eliminarBibliografiaPorISBN(Long isbn) {
+        Optional<Bibliografia> bibliografiaOptional = bibliografiaRepository.findByIsbn(isbn);
+        bibliografiaOptional.ifPresent(bibliografia -> {
+            bibliografia.setEliminada(true);
+            bibliografiaRepository.save(bibliografia);
+        });
+        String mensaje = bibliografiaOptional.isPresent() ? "Bibliografía eliminada correctamente. " : "No se encontró bibliografía con el ISBN proporcionado. ";
+        return new MensajeDTO(mensaje);
+    }
+@Transactional
+    public MensajeDTO recuperarBibliografiaPorISBN(Long isbn) {
+    Optional<Bibliografia> bibliografiaOptional = bibliografiaRepository.findByIsbnAndEliminadaTrue(isbn);
+    bibliografiaOptional.ifPresent(bibliografia -> {
+        bibliografia.setEliminada(false);
+        bibliografiaRepository.save(bibliografia);
+    });
+    String mensaje = bibliografiaOptional.isPresent() ? "Bibliografía recuperada correctamente." : "No se encontró bibliografía con el ISBN proporcionado.";
+    return new MensajeDTO(mensaje);
 
-        if (editorialOptional.isPresent()) {
-            ModelMapper modelMapper = new ModelMapper();
-            return Optional.of(modelMapper.map(editorialOptional.get(), Editorial.class));
-        }
-
-        throw new NoSuchElementException("La editorial no existe");
-    }*/
+    }
 
 }
 

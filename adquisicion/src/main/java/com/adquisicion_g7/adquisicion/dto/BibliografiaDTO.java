@@ -17,7 +17,6 @@ public class BibliografiaDTO {
     private String titulo;
     private String nombreAutor;
     private String apellidoAutor;
-    //private Integer anioPublicacion;
     private Long anioPublicacion;
 
     @NotBlank
@@ -25,6 +24,7 @@ public class BibliografiaDTO {
     private Long isbn;
     private Long issn;
     private Float monto;
+    private Boolean eliminada;
 
     @NotBlank
     private String tipoMaterial;

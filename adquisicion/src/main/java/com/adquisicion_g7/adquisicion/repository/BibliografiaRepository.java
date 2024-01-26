@@ -11,10 +11,14 @@ import java.util.Optional;
 
 @Repository
 public interface BibliografiaRepository extends JpaRepository<Bibliografia, Long> {
-    public Bibliografia findByIsbn (Long isbn);
+    Optional<Bibliografia> findByIsbn (Long isbn);
 
- List<Bibliografia> findByTitulo(String titulo);
+    List<Bibliografia> findByTitulo(String titulo);
 
     List<Bibliografia> findByApellidoAutor(String apellidoAutor);
     List<Bibliografia> findByEditorial(Editorial editorial);
+
+    Optional<Bibliografia> findByIsbnAndEliminadaTrue(Long isbn);
+
+    List<Bibliografia> findAllByEliminada(boolean b);
 }

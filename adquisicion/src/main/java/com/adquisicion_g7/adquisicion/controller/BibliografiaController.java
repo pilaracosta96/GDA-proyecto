@@ -1,6 +1,7 @@
 package com.adquisicion_g7.adquisicion.controller;
 
 import com.adquisicion_g7.adquisicion.dto.BibliografiaDTO;
+import com.adquisicion_g7.adquisicion.dto.MensajeDTO;
 import com.adquisicion_g7.adquisicion.entities.Bibliografia;
 import com.adquisicion_g7.adquisicion.entities.Editorial;
 import com.adquisicion_g7.adquisicion.service.BibliografiaService;
@@ -26,10 +27,9 @@ public class BibliografiaController {
     }
 
     @PostMapping("/guardar")
-    public ResponseEntity<Bibliografia> guardarBibliografia(@RequestBody @Valid BibliografiaDTO bibliografiaDTO) {
-
-        //
-        return ResponseEntity.ok(bibliografiaService.guardarBibliografia(bibliografiaDTO));
+    public ResponseEntity<MensajeDTO> guardarBibliografia(@RequestBody @Valid BibliografiaDTO bibliografiaDTO) {
+        MensajeDTO mensajeDTO = bibliografiaService.guardarBibliografia(bibliografiaDTO);
+        return ResponseEntity.ok(mensajeDTO);
     }
 
     @DeleteMapping("/borrar/{id}")
@@ -39,8 +39,9 @@ public class BibliografiaController {
     }
 
     @GetMapping("/titulo/{titulo}")
-    public ResponseEntity<List<Bibliografia>> buscarPorTitulo(@PathVariable String titulo) {
-        return ResponseEntity.ok(bibliografiaService.buscarPorTitulo(titulo));
+    public ResponseEntity<MensajeDTO> buscarPorTitulo(@PathVariable String titulo) {
+        MensajeDTO mensajeDTO = bibliografiaService.buscarPorTitulo(titulo);
+        return ResponseEntity.ok(mensajeDTO);
     }
 
     @GetMapping("/apellidoAutor/{apellidoAutor}")
@@ -54,9 +55,20 @@ public class BibliografiaController {
         return ResponseEntity.ok(bibliografiaService.listarTodas());
     }
     @GetMapping("/editorial/{nombreEditorial}")
-    public ResponseEntity<List<Bibliografia>> buscarNombreEditorial(@PathVariable String nombreEditorial) {
-        List<Bibliografia> bibliografias = bibliografiaService.buscarNombreEditorial(nombreEditorial);
-        return ResponseEntity.ok(bibliografias);
+    public ResponseEntity<MensajeDTO> buscarNombreEditorial(@PathVariable String nombreEditorial) {
+        MensajeDTO mensajeDTO = bibliografiaService.buscarNombreEditorial(nombreEditorial);
+        return ResponseEntity.ok(mensajeDTO);
+    }
+    @DeleteMapping("/eliminarPorISBN/{isbn}")
+    public ResponseEntity<MensajeDTO> eliminarBibliografiaPorISBN(@PathVariable Long isbn){
+        MensajeDTO mensajeDTO = bibliografiaService.eliminarBibliografiaPorISBN(isbn);
+        return ResponseEntity.ok(mensajeDTO);
     }
 
+    @PutMapping("/recuprePorISBN/{isbn}")
+    public ResponseEntity<MensajeDTO> recuperarBibliografiaPorISBN(@PathVariable Long isbn) {
+        MensajeDTO mensajeDTO = bibliografiaService.recuperarBibliografiaPorISBN(isbn);
+        return ResponseEntity.ok(mensajeDTO);
     }
+
+}
