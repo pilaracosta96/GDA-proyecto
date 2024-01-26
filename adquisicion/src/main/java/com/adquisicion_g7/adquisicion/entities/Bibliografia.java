@@ -51,6 +51,9 @@ public class Bibliografia {
     @Column(name = "monto" )
     private Float monto;
 
+    @Column(name = "eliminada")
+    private boolean elimidana;
+
     //@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "tipo_material_id")

@@ -1,4 +1,4 @@
-package com.adquisicion_g7.adquisicion.controllers;
+package com.adquisicion_g7.adquisicion.controller;
 
 import com.adquisicion_g7.adquisicion.dto.BibliografiaDTO;
 import com.adquisicion_g7.adquisicion.entities.Bibliografia;
