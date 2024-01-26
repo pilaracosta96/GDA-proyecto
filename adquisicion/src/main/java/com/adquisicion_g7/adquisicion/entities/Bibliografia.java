@@ -52,7 +52,7 @@ public class Bibliografia {
     private Float monto;
 
     @Column(name = "eliminada")
-    private boolean elimidana;
+    private boolean eliminada;
 
     //@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
