@@ -65,7 +65,7 @@ public class BibliografiaController {
         return ResponseEntity.ok(mensajeDTO);
     }
 
-    @PutMapping("/recuprePorISBN/{isbn}")
+    @PutMapping("/recuperarPorISBN/{isbn}")
     public ResponseEntity<MensajeDTO> recuperarBibliografiaPorISBN(@PathVariable Long isbn) {
         MensajeDTO mensajeDTO = bibliografiaService.recuperarBibliografiaPorISBN(isbn);
         return ResponseEntity.ok(mensajeDTO);
