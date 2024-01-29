@@ -18,6 +18,6 @@ public interface LicenciaSoftwareRepository extends JpaRepository<LicenciaSoftwa
     Optional<LicenciaSoftware> findByIdAndEliminadaTrue(Long id);
 
     List<LicenciaSoftware> findByFabricante(Fabricante fabricante);
-    Optional<LicenciaSoftware> findByAnio (Date anio);
+    Optional<LicenciaSoftware> findByAnio (Long anio);
     List<LicenciaSoftware> findAllByEliminada(boolean b);
 }

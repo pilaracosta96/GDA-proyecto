@@ -40,10 +40,13 @@ public class LicenciaSoftware {
     private Fabricante fabricante;
 
     @Column(name = "numero_release")
-    private Long numeroRelease;
+    private Float numeroRelease;
 
     @Column(name = "version")
-    private Long version;
+    private Float version;
+
+    @Column(name = "monto")
+    private Float monto;
 
     @Column(name = "eliminada")
     private Boolean eliminada;

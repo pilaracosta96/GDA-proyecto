@@ -52,6 +52,7 @@ public class LicenciaSoftwareService {
         licenciaSoftware.setFechaVencimiento(licenciaSoftwareDTO.getFechaVencimiento());
         licenciaSoftware.setNumeroRelease(licenciaSoftwareDTO.getNumeroRelease());
         licenciaSoftware.setVersion(licenciaSoftwareDTO.getVersion());
+        licenciaSoftware.setMonto(licenciaSoftwareDTO.getMonto());
         licenciaSoftware.setEliminada(false);
 
         return licenciaSoftware;

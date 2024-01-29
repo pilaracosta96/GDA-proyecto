@@ -22,6 +22,7 @@ public class LicenciaSoftwareDTO {
 
     @NotBlank
     private String fabricante;
-    private Long numeroRelease;
-    private Long version;
+    private Float numeroRelease;
+    private Float version;
+    private Float monto;
 }
