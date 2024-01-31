@@ -136,7 +136,7 @@ public class BibliografiaService {
         bibliografia.setEliminada(false);
         bibliografiaRepository.save(bibliografia);
     });
-    String mensaje = bibliografiaOptional.isPresent() ? "Bibliografía recuperada correctamente." : "No se encontró bibliografía con el ISBN proporcionado.";
+    String mensaje = bibliografiaOptional.isPresent() ? "Bibliografía recuperada correctamente." : "No se encontró bibliografía eliminada con el ISBN proporcionado.";
     return new MensajeDTO(mensaje);
 
     }

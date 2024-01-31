@@ -60,10 +60,10 @@ public class ServicioService {
     public List<Servicio> listarTodas() {return servicioRepository.findAllByEliminada(false);}
 
     public MensajeDTO buscarNombreTipoServicio(String nombreTipoServicio) {
-        Optional<Servicio> servicioOptional = servicioRepository.findByNombreTipoServicio(nombreTipoServicio);
+        Optional<TipoServicio> tipoServicioOptional = tipoServicioRepository.findByNombreTipoServicio(nombreTipoServicio);
 
-        if (servicioOptional.isPresent()) {
-            Servicio servicio = servicioOptional.get();
+        if (tipoServicioOptional.isPresent()) {
+            TipoServicio tipoServicio  = tipoServicioOptional.get();
             String mensaje = " El servicio " + nombreTipoServicio + " existe en la base.";
             return new MensajeDTO(mensaje);
         }else {
@@ -88,7 +88,7 @@ public class ServicioService {
             servicio.setEliminada(false);
             servicioRepository.save(servicio);
         });
-        String mensaje = servicioOptional.isPresent() ? "Servicio recuperado correctamente." : "No se encontró servicio con el ID proporcionado.";
+        String mensaje = servicioOptional.isPresent() ? "Servicio recuperado correctamente." : "No se encontró servicio eliminado con el ID proporcionado.";
         return new MensajeDTO(mensaje);
 
     }

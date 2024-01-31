@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface ServicioRepository extends JpaRepository<Servicio, Long> {
-    Optional<Servicio> findByNombreTipoServicio(String nombreTipoServicio);
+    //Optional<Servicio> findByNombreTipoServicio(String nombreTipoServicio);
 
     Optional<Servicio> findByIdAndEliminadaTrue(Long id);
     List<Servicio> findAllByEliminada(boolean b);

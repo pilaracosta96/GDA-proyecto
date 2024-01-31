@@ -34,9 +34,9 @@ public class ServicioController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/nombre/{nombre}")
-    public  ResponseEntity<MensajeDTO> buscarPorNombreTipoServicio(@PathVariable String nombre) {
-        MensajeDTO mensajeDTO = servicioService.buscarNombreTipoServicio(nombre);
+    @GetMapping("/nombre/{nombreTipoServicio}")
+    public  ResponseEntity<MensajeDTO> buscarPorNombreTipoServicio(@PathVariable String nombreTipoServicio) {
+        MensajeDTO mensajeDTO = servicioService.buscarNombreTipoServicio(nombreTipoServicio);
         return ResponseEntity.ok(mensajeDTO);
     }
 

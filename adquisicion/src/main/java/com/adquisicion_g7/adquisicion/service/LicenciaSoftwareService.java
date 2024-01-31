@@ -106,7 +106,7 @@ public class LicenciaSoftwareService {
                 licenciaSoftware.setEliminada(false);
                 licenciaSoftwareRepository.save(licenciaSoftware);
             });
-            String mensaje = licenciaSoftwareOptional.isPresent() ? "LicenciaSoftware recuperada correctamente." : "No se encontró LicenciaSoftware con el ID proporcionado.";
+            String mensaje = licenciaSoftwareOptional.isPresent() ? "LicenciaSoftware recuperada correctamente." : "No se encontró LicenciaSoftware eliminada con el ID proporcionado.";
             return new MensajeDTO(mensaje);
 
         }
