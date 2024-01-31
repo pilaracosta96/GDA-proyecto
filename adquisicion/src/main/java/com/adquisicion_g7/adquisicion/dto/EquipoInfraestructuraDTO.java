@@ -13,13 +13,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class ServicioDTO {
-    private Long fecha;
+public class EquipoInfraestructuraDTO {
+
+    private Long fechaIncorporacion;
     private Float monto;
+    private String descripcion;
+    private Long numeroSerie;
+
     @NotBlank
-    private String tipoServicio;
+    private String tipoEquipo;
     private Boolean eliminada;
 
 }
-
-
