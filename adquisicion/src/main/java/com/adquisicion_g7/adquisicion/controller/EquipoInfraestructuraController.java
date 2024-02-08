@@ -15,6 +15,7 @@ import java.util.List;
 
 @Validated
 @RestController
+@CrossOrigin("http://localhost:4200")
 @RequestMapping("/api/equipoInfraestructura")
 public class EquipoInfraestructuraController {
 
