@@ -31,7 +31,11 @@ public class EquipoInfraestructuraService {
 
         // Verificar y guardar el Tipo de Equipo
         TipoEquipo tipoEquipo = tipoEquipoRepository.findByNombreTipoEquipo(nombreTipoEquipo)
-                .orElseGet(() -> tipoEquipoRepository.save(new TipoEquipo(null, nombreTipoEquipo)));
+                .orElseGet(() -> tipoEquipoRepository.save(
+                        new TipoEquipo(nombreTipoEquipo,
+                                equipoInfraestructuraDTO.getCantidad(), // Tomar del DTO
+                                equipoInfraestructuraDTO.getPrecioUnitario() // Tomar del DTO
+                        )));
 
 
         // Crear el nueva Servicio y asignarle el Tipo de Equipo
@@ -45,18 +49,27 @@ public class EquipoInfraestructuraService {
 
     }
 
-    private EquipoInfraestructura convertirDTOAEntidad(EquipoInfraestructuraDTO equipoInfraestructuraDTO){
+    private EquipoInfraestructura convertirDTOAEntidad(EquipoInfraestructuraDTO equipoInfraestructuraDTO) {
         EquipoInfraestructura equipoInfraestructura = new EquipoInfraestructura();
         equipoInfraestructura.setFechaIncorporacion(equipoInfraestructuraDTO.getFechaIncorporacion());
         equipoInfraestructura.setMonto(equipoInfraestructuraDTO.getMonto());
-        equipoInfraestructura.setDescripcion(equipoInfraestructura.getDescripcion());
-        equipoInfraestructura.setNumeroSerie(equipoInfraestructura.getNumeroSerie());
-        equipoInfraestructura.setTipoEquipo(equipoInfraestructura.getTipoEquipo());
+        equipoInfraestructura.setDescripcion(equipoInfraestructuraDTO.getDescripcion());
+        equipoInfraestructura.setNumeroSerie(equipoInfraestructuraDTO.getNumeroSerie());
 
-        //servicio.setEliminada(false);
+        // asignamos el TipoEquipo al nuevo equipoInfraestructura
+        String nombreTipoEquipo = equipoInfraestructuraDTO.getTipoEquipo().toUpperCase();
+        Long cantidad = equipoInfraestructuraDTO.getCantidad();
+        Float precioUnitario = equipoInfraestructuraDTO.getPrecioUnitario();
+
+        TipoEquipo tipoEquipo = tipoEquipoRepository.findByNombreTipoEquipo(nombreTipoEquipo)
+                .orElseGet(() -> tipoEquipoRepository.save(new TipoEquipo(nombreTipoEquipo, cantidad, precioUnitario)));
+
+        equipoInfraestructura.setTipoEquipo(tipoEquipo);
+        equipoInfraestructura.setEliminada(false);
 
         return equipoInfraestructura;
     }
+
 
     public void removerEquipoInfraestructura (Long id) { equipoInfraestructuraRepository.deleteById(id);}
 

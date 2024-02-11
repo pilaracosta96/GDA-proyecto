@@ -20,9 +20,15 @@ public class TipoEquipo {
     @Column (name = "nombre_tipo_equipo")
     private String nombreTipoEquipo;
 
-    //@Column (name = "cantidad")
-    //private Long cantidad;
+    @Column (name = "cantidad")
+    private Long cantidad;
 
-    //@Column (name = "precio_unitario")
-    //private Float precioUnitario;
+    @Column (name = "precio_unitario")
+    private Float precioUnitario;
+
+    public TipoEquipo(String nombreTipoEquipo, Long cantidad, Float precioUnitario) {
+        this.nombreTipoEquipo = nombreTipoEquipo;
+        this.cantidad = cantidad;
+        this.precioUnitario = precioUnitario;
+    }
 }

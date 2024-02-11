@@ -37,6 +37,15 @@ public class BibliografiaService {
         String nombreTipoMaterial = bibliografiaDTO.getTipoMaterial().toUpperCase();
         Long isbn = bibliografiaDTO.getIsbn();
 
+        // Convertir el ISBN a String
+        String isbnString = String.valueOf(isbn);
+
+        // Verificar longitud del ISBN
+        if (isbnString.length() != 13) {
+            String mensaje = "El ISBN debe tener exactamente 13 caracteres.";
+            return new MensajeDTO(mensaje);
+        }
+
         // Verificar ISBN
         Optional<Bibliografia> bibliografiaOptional = bibliografiaRepository.findByIsbn(isbn);
         if (bibliografiaOptional.isPresent()) {

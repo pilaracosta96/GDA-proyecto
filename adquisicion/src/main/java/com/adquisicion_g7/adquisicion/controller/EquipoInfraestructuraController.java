@@ -8,10 +8,12 @@ import com.adquisicion_g7.adquisicion.service.EquipoInfraestructuraService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Validated
 @RestController
 @CrossOrigin("http://localhost:4200")
 @RequestMapping("/api/equipoInfraestructura")
