@@ -17,6 +17,7 @@ import java.util.Optional;
 
 @CrossOrigin("http://localhost:4200")
 @RestController
+@CrossOrigin("http://localhost:4200")
 @RequestMapping("/api/bibliografias")
 public class BibliografiaController {
 
