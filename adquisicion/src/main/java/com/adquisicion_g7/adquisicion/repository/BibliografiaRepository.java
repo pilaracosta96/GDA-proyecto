@@ -18,7 +18,7 @@ public interface BibliografiaRepository extends JpaRepository<Bibliografia, Long
     List<Bibliografia> findByTitulo(String titulo);
 
     @Query("SELECT b FROM Bibliografia b WHERE b.apellidoAutor = ?1 AND b.eliminada = false")
-    List<Bibliografia> busqapellido nofindByApellidoAutor(String apellidoAutor);
+    List<Bibliografia> gfindByApellidoAutor(String apellidoAutor);
     List<Bibliografia> findByEditorial(Editorial editorial);
 
     Optional<Bibliografia> findByIsbnAndEliminadaTrue(Long isbn);
