@@ -22,7 +22,7 @@ public class EquipoInfraestructura {
     private TipoEquipo tipoEquipo;
 
     @Column(name = "fecha_incorporacion" )
-    private Long fechaIncorporacion;
+    private String fechaIncorporacion;
 
     @Column(name = "monto")
     private Float monto;
@@ -31,7 +31,7 @@ public class EquipoInfraestructura {
     private String descripcion;
 
     @Column(name = "numero_serie")
-    private Long  numeroSerie;
+    private String  numeroSerie;
 
     @Column(name = "eliminada")
     private Boolean eliminada;

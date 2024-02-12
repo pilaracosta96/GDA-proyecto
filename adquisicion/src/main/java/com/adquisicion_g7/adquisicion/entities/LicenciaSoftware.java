@@ -25,13 +25,13 @@ public class LicenciaSoftware {
     private String nombre;
 
     @Column(name = "anio")
-    private Long anio;
+    private String anio;
 
     @Column(name = "fecha_otorgamiento" )
-    private Long fechaOtorgamiento;
+    private String fechaOtorgamiento;
 
     @Column(name = "fecha_vencimiento" )
-    private Long fechaVencimiento;
+    private String fechaVencimiento;
 
 
     //@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -40,10 +40,10 @@ public class LicenciaSoftware {
     private Fabricante fabricante;
 
     @Column(name = "numero_release")
-    private Float numeroRelease;
+    private String numeroRelease;
 
     @Column(name = "version")
-    private Float version;
+    private String version;
 
     @Column(name = "monto")
     private Float monto;

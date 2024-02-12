@@ -20,7 +20,7 @@ public class Servicio {
     private Long id;
 
     @Column(name = "fecha")
-    private Long fecha;
+    private String fecha;
 
     @Column(name = "monto")
     private Float monto;

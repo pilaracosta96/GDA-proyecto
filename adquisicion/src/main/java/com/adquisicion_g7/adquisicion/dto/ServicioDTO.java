@@ -14,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class ServicioDTO {
-    private Long fecha;
+    private String fecha;
     private Float monto;
     @NotBlank
     private String tipoServicio;

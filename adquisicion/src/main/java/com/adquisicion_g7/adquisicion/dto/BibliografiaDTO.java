@@ -17,7 +17,7 @@ public class BibliografiaDTO {
     private String titulo;
     private String nombreAutor;
     private String apellidoAutor;
-    private Long anioPublicacion;
+    private String anioPublicacion;
 
     @NotBlank
     private String editorial;

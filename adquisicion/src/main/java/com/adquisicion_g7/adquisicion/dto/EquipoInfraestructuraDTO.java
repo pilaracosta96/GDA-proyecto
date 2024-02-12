@@ -13,10 +13,10 @@ import lombok.*;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class EquipoInfraestructuraDTO {
 
-    private Long fechaIncorporacion;
+    private String fechaIncorporacion;
     private Float monto;
     private String descripcion;
-    private Long numeroSerie;
+    private String numeroSerie;
 
     @NotBlank
     private String tipoEquipo;

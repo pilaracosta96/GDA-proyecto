@@ -96,7 +96,7 @@ public class LicenciaSoftwareService {
                 licenciaSoftware.setEliminada(true);
                 licenciaSoftwareRepository.save(licenciaSoftware);
             });
-            String mensaje = licenciaSoftwareOptional.isPresent() ? "LicenciaSoftware eliminada correctamente. " : "No se encontró bibliografía con el ISBN proporcionado. ";
+            String mensaje = licenciaSoftwareOptional.isPresent() ? "LicenciaSoftware eliminada correctamente. " : "No se encontró Licencia con el Id proporcionado. ";
             return new MensajeDTO(mensaje);
         }
         @Transactional

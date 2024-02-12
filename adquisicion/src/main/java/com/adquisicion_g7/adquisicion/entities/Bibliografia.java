@@ -29,7 +29,7 @@ public class Bibliografia {
     private String apellidoAutor;
 
     @Column(name = "anio_publicacion" )
-    private Long anioPublicacion;
+    private String anioPublicacion;
 
     //@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
