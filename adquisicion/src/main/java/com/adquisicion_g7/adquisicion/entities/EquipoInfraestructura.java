@@ -30,7 +30,7 @@ public class EquipoInfraestructura {
     @Column(name = "descripcion" )
     private String descripcion;
 
-    @Column(name = "numero_serie")
+    @Column(name = "numero_serie", unique = true, nullable = false)
     private String  numeroSerie;
 
     @Column(name = "eliminada")

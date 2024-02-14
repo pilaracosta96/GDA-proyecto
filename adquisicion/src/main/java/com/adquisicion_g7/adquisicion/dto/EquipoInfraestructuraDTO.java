@@ -16,7 +16,7 @@ public class EquipoInfraestructuraDTO {
     private String fechaIncorporacion;
     private Float monto;
     private String descripcion;
-    private String numeroSerie;
+
 
     @NotBlank
     private String tipoEquipo;
@@ -27,5 +27,5 @@ public class EquipoInfraestructuraDTO {
 
     @NotNull
     private Float precioUnitario;
-
+    private String numeroSerie;
 }
