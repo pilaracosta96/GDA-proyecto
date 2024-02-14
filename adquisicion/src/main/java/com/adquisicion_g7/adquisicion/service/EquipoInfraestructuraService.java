@@ -27,7 +27,20 @@ public class EquipoInfraestructuraService {
 
     @Transactional
     public MensajeDTO guardarEquipoInfraestructura(EquipoInfraestructuraDTO equipoInfraestructuraDTO) {
+
+        // Verificar si el número de serie es nulo
+        if (equipoInfraestructuraDTO.getNumeroSerie() == null || equipoInfraestructuraDTO.getNumeroSerie().trim().isEmpty()) {
+            return new MensajeDTO("El número de serie no puede ser nulo. Por favor, ingrese un número de serie válido.");
+        }
+
+        if (equipoInfraestructuraRepository.existsByNumeroSerieAndEliminadaFalse(equipoInfraestructuraDTO.getNumeroSerie())) {
+            return new MensajeDTO("Ya existe un equipo con el mismo número de serie. Por Favor Ingrese un nuevo numero");
+        }
+
+
+
         String nombreTipoEquipo = equipoInfraestructuraDTO.getTipoEquipo().toUpperCase();
+
 
         // Verificar y guardar el Tipo de Equipo
         TipoEquipo tipoEquipo = tipoEquipoRepository.findByNombreTipoEquipo(nombreTipoEquipo)

@@ -26,7 +26,19 @@ public class LicenciaSoftwareService {
 
     @Transactional
     public MensajeDTO guardarLicenciaSoftware (LicenciaSoftwareDTO licenciaSoftwareDTO){
-        String nombreFabricante = licenciaSoftwareDTO.getFabricante().toUpperCase();
+
+        // Verificar si el número de serie es nulo
+        if (licenciaSoftwareDTO.getNumeroSerie() == null || licenciaSoftwareDTO.getNumeroSerie().trim().isEmpty()) {
+            return new MensajeDTO("El número de serie no puede ser nulo. Por favor, ingrese un número de serie válido.");
+        }
+
+        if (licenciaSoftwareRepository.existsByNumeroSerieAndEliminadaFalse(licenciaSoftwareDTO.getNumeroSerie())) {
+            return new MensajeDTO("Ya existe una licencia con el número de serie proporcionado.");
+        }
+        // Verificar si el número de serie es nulo
+
+
+    String nombreFabricante = licenciaSoftwareDTO.getFabricante().toUpperCase();
 
     // Verificar y guardar el Fabricante
     Fabricante fabricante = fabricanteRepository.findByNombreFabricante(nombreFabricante)
@@ -53,6 +65,7 @@ public class LicenciaSoftwareService {
         licenciaSoftware.setNumeroRelease(licenciaSoftwareDTO.getNumeroRelease());
         licenciaSoftware.setVersion(licenciaSoftwareDTO.getVersion());
         licenciaSoftware.setMonto(licenciaSoftwareDTO.getMonto());
+        licenciaSoftware.setNumeroSerie(licenciaSoftwareDTO.getNumeroSerie());
         licenciaSoftware.setEliminada(false);
 
         return licenciaSoftware;

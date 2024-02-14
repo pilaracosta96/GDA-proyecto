@@ -48,6 +48,9 @@ public class LicenciaSoftware {
     @Column(name = "monto")
     private Float monto;
 
+    @Column(name = "numero_serie", unique = true, nullable = false)
+    private String numeroSerie;
+
     @Column(name = "eliminada")
     private Boolean eliminada;
 
