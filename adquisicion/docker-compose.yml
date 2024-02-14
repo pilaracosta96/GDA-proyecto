@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  app:
+    image: adquisicion:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app-adquisiciones
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/adquisiciones?allowPublicKeyRetrieval=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: root #${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: 12345678 #${SPRING_DATASOURCE_PASSWORD}
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678 #${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: adquisiciones #${MYSQL_DATABASE}git 
+      #MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+volumes:
+  mysql-data:
