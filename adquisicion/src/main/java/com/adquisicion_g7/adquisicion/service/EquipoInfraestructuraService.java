@@ -87,10 +87,10 @@ public class EquipoInfraestructuraService {
 
         if (tipoEquipoOptional.isPresent()) {
             TipoEquipo tipoEquipo = tipoEquipoOptional.get();
-            String mensaje = " El equipo " + nombreTipoEquipo + " existe en la base.";
+            String mensaje = " El tipo de equipo " + nombreTipoEquipo + " existe en la base.";
             return new MensajeDTO(mensaje);
         } else {
-            String mensaje = "No se encontró el equipo " + nombreTipoEquipo;
+            String mensaje = "No se encontró el tipo de equipo " + nombreTipoEquipo;
             return new MensajeDTO(mensaje);
         }
     }

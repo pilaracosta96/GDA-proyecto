@@ -16,13 +16,13 @@ import lombok.Setter;
 public class LicenciaSoftwareDTO {
 
     private String nombre;
-    private Long anio;
-    private Long fechaOtorgamiento;
-    private Long fechaVencimiento;
+    private String anio;
+    private String fechaOtorgamiento;
+    private String fechaVencimiento;
 
     @NotBlank
     private String fabricante;
-    private Float numeroRelease;
-    private Float version;
+    private String numeroRelease;
+    private String version;
     private Float monto;
 }

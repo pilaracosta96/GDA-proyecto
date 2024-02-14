@@ -120,7 +120,7 @@ public class BibliografiaService {
 
         if (editorialOptional.isPresent()) {
             Editorial editorial = editorialOptional.get();
-            String mensaje = " La editorial " + nombreEditorial + " existe en la base.";
+            String mensaje = "La editorial " + nombreEditorial + " existe en la base.";
             return new MensajeDTO(mensaje);
         }else {
             String mensaje = "No se encontró la editorial " + nombreEditorial;
