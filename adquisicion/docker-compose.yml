@@ -23,7 +23,7 @@ services:
     container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: 12345678 #${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: adquisiciones #${MYSQL_DATABASE}git 
+      MYSQL_DATABASE: adquisiciones #${MYSQL_DATABASE}
       #MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - "3308:3306"
