@@ -1,6 +1,7 @@
 package com.adquisicion_g7.adquisicion.repository;
 
 
+import com.adquisicion_g7.adquisicion.dto.MensajeDTO;
 import com.adquisicion_g7.adquisicion.entities.Bibliografia;
 import com.adquisicion_g7.adquisicion.entities.Fabricante;
 import com.adquisicion_g7.adquisicion.entities.LicenciaSoftware;
@@ -20,4 +21,10 @@ public interface LicenciaSoftwareRepository extends JpaRepository<LicenciaSoftwa
     List<LicenciaSoftware> findByFabricante(Fabricante fabricante);
     Optional<LicenciaSoftware> findByAnio (Long anio);
     List<LicenciaSoftware> findAllByEliminada(boolean b);
+
+    //Optional<LicenciaSoftware> findByNumeroSerie(String numeroSerie);
+
+    boolean existsByNumeroSerieAndEliminadaFalse(String numeroSerie);
+
+
 }
