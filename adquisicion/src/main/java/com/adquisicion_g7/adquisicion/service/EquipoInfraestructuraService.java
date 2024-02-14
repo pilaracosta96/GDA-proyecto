@@ -27,7 +27,12 @@ public class EquipoInfraestructuraService {
 
     @Transactional
     public MensajeDTO guardarEquipoInfraestructura(EquipoInfraestructuraDTO equipoInfraestructuraDTO) {
+        if (equipoInfraestructuraRepository.existsByNumeroSerieAndEliminadaFalse(equipoInfraestructuraDTO.getNumeroSerie())) {
+            return new MensajeDTO("Ya existe un equipo con el mismo número de serie. Por Favor Ingrese un nuevo numero");
+        }
+
         String nombreTipoEquipo = equipoInfraestructuraDTO.getTipoEquipo().toUpperCase();
+
 
         // Verificar y guardar el Tipo de Equipo
         TipoEquipo tipoEquipo = tipoEquipoRepository.findByNombreTipoEquipo(nombreTipoEquipo)
