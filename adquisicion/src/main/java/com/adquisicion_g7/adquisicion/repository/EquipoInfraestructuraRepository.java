@@ -18,5 +18,6 @@ public interface EquipoInfraestructuraRepository extends JpaRepository<EquipoInf
     Optional<EquipoInfraestructura> findByIdAndEliminadaTrue(Long id);
     List<EquipoInfraestructura> findAllByEliminada(boolean b);
 
+    boolean existsByNumeroSerieAndEliminadaFalse(String numeroSerie);
 
 }

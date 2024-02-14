@@ -31,7 +31,7 @@ public class EquipoInfraestructura {
     private String descripcion;
 
     @Column(name = "numero_serie")
-    private Long  numeroSerie;
+    private String numeroSerie;
 
     @Column(name = "eliminada")
     private Boolean eliminada;
