@@ -19,6 +19,7 @@ public class LicenciaSoftwareDTO {
     private String anio;
     private String fechaOtorgamiento;
     private String fechaVencimiento;
+    private String numeroSerie;
 
     @NotBlank
     private String fabricante;
