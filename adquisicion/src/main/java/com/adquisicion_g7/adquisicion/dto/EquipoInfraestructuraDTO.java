@@ -17,7 +17,6 @@ public class EquipoInfraestructuraDTO {
     private Float monto;
     private String descripcion;
 
-
     @NotBlank
     private String tipoEquipo;
     private Boolean eliminada;
@@ -27,5 +26,6 @@ public class EquipoInfraestructuraDTO {
 
     @NotNull
     private Float precioUnitario;
+    @NotNull
     private String numeroSerie;
 }
