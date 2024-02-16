@@ -43,7 +43,7 @@ public class BibliografiaService {
         // Verificar longitud del ISBN
         if (isbnString.length() != 13) {
             String mensaje = "El ISBN debe tener exactamente 13 caracteres.";
-            return new MensajeDTO(mensaje);
+            throw new IllegalArgumentException(mensaje);
         }
 
         // Verificar ISBN
