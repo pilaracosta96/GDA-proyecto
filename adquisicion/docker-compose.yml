@@ -1,6 +1,16 @@
 version: '3.8'
 
 services:
+  # Frontend (Angular + Node.js)
+  frontend:
+    image: node:20.11-alpine3.18
+    build:
+      context: C:\Users\alesa\Adquisiciones  # Ruta a tu código fuente de Angular
+    depends_on:
+      - app
+    ports:
+      - "4200:4200"  # Puerto para acceder al frontend desde el navegador
+
   app:
     image: adquisicion:latest
     build:
