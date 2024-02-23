@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-//@JsonNaming(PropertyNamingStrategy.class.SnakeCaseStrategy.class)
+@JsonNaming(PropertyNamingStrategy.class)
 public class MensajeDTO {
     private String mensaje;
 }

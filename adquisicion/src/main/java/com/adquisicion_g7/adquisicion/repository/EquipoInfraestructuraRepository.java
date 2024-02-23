@@ -20,4 +20,8 @@ public interface EquipoInfraestructuraRepository extends JpaRepository<EquipoInf
 
     boolean existsByNumeroSerieAndEliminadaFalse(String numeroSerie);
 
+    Optional<EquipoInfraestructura> findByNumeroSerieAndEliminadaTrue(String numeroSerie);
+
+    Optional<EquipoInfraestructura> findByNumeroSerieAndEliminadaFalse(String numeroSerie);
+
 }

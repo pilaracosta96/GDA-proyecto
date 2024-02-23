@@ -124,4 +124,29 @@ public class EquipoInfraestructuraService {
         return new MensajeDTO(mensaje);
 
     }
+    @Transactional
+    public MensajeDTO eliminarEquipoPorNumeroSerie(String numeroSerie) {
+        Optional<EquipoInfraestructura> equipoInfraestructuraOptional = equipoInfraestructuraRepository.findByNumeroSerieAndEliminadaFalse(numeroSerie);
+        equipoInfraestructuraOptional.ifPresent(equipoInfraestructura -> {
+            equipoInfraestructura.setEliminada(true);
+            equipoInfraestructuraRepository.save(equipoInfraestructura);
+        });
+        String mensaje = equipoInfraestructuraOptional.isPresent() ? "Equipo eliminado correctamente. " : "No se encontró equipo con el número de serie proporcionado. ";
+        return new MensajeDTO(mensaje);
+    }
+
+    @Transactional
+    public MensajeDTO recuperarEquipoPorNumeroSerie(String numeroSerie) {
+        Optional<EquipoInfraestructura> equipoInfraestructuraOptional = equipoInfraestructuraRepository.findByNumeroSerieAndEliminadaTrue(numeroSerie);
+        equipoInfraestructuraOptional.ifPresent(equipoInfraestructura -> {
+            equipoInfraestructura.setEliminada(false);
+            equipoInfraestructuraRepository.save(equipoInfraestructura);
+        });
+        String mensaje = equipoInfraestructuraOptional.isPresent() ? "Equipo recuperado correctamente." : "No se encontró el Equipo eliminado con el número de serie proporcionado.";
+        return new MensajeDTO(mensaje);
+    }
+    public Optional<EquipoInfraestructura> buscarPorNumeroSerie(String numeroSerie) {
+        return equipoInfraestructuraRepository.findByNumeroSerieAndEliminadaFalse(numeroSerie);
+    }
+
 }

@@ -8,10 +8,12 @@ import com.adquisicion_g7.adquisicion.entities.LicenciaSoftware;
 import com.adquisicion_g7.adquisicion.service.LicenciaSoftwareService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -65,4 +67,26 @@ public class LicenciaSoftwareController {
         MensajeDTO mensajeDTO = licenciaSoftwareService.recuperarLicenciaSoftwarePorId(id);
         return ResponseEntity.ok(mensajeDTO);
     }
+    @DeleteMapping("/eliminarPorNumeroSerie/{numeroSerie}")
+    public ResponseEntity<MensajeDTO> eliminarLicenciaSoftwarePorNumeroSerie(@PathVariable String numeroSerie) {
+        MensajeDTO mensajeDTO = licenciaSoftwareService.eliminarLicenciaSoftwarePorNumeroSerie(numeroSerie);
+        return ResponseEntity.ok(mensajeDTO);
+    }
+
+    @PutMapping("/recuperarPorNumeroSerie/{numeroSerie}")
+    public ResponseEntity<MensajeDTO> recuperarLicenciaSoftwarePorNumeroSerie(@PathVariable String numeroSerie) {
+        MensajeDTO mensajeDTO = licenciaSoftwareService.recuperarLicenciaSoftwarePorNumeroSerie(numeroSerie);
+        return ResponseEntity.ok(mensajeDTO);
+    }
+    @GetMapping("/buscarPorNumeroSerie/{numeroSerie}")
+    public ResponseEntity<?> buscarPorNumeroSerie(@PathVariable String numeroSerie) {
+        Optional<LicenciaSoftware> licenciaSoftwareOptional = licenciaSoftwareService.buscarPorNumeroSerie(numeroSerie);
+
+        if (licenciaSoftwareOptional.isPresent()) {
+            return ResponseEntity.ok(licenciaSoftwareOptional.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El número de serie no existe. Por favor, ingrese un número de serie válido.");
+        }
+    }
+
 }

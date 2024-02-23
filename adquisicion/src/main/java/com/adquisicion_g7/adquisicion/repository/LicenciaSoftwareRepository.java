@@ -27,4 +27,8 @@ public interface LicenciaSoftwareRepository extends JpaRepository<LicenciaSoftwa
     boolean existsByNumeroSerieAndEliminadaFalse(String numeroSerie);
 
 
+    Optional<LicenciaSoftware> findByNumeroSerieAndEliminadaFalse(String numeroSerie);
+
+    Optional<LicenciaSoftware> findByNumeroSerieAndEliminadaTrue(String numeroSerie);
+
 }
