@@ -123,6 +123,30 @@ public class LicenciaSoftwareService {
             return new MensajeDTO(mensaje);
 
         }
-
+    @Transactional
+    public MensajeDTO eliminarLicenciaSoftwarePorNumeroSerie(String numeroSerie) {
+        Optional<LicenciaSoftware> licenciaSoftwareOptional = licenciaSoftwareRepository.findByNumeroSerieAndEliminadaFalse(numeroSerie);
+        licenciaSoftwareOptional.ifPresent(licenciaSoftware -> {
+            licenciaSoftware.setEliminada(true);
+            licenciaSoftwareRepository.save(licenciaSoftware);
+        });
+        String mensaje = licenciaSoftwareOptional.isPresent() ? "LicenciaSoftware eliminada correctamente. " : "No se encontró LicenciaSoftware con el número de serie proporcionado. ";
+        return new MensajeDTO(mensaje);
     }
+
+    @Transactional
+    public MensajeDTO recuperarLicenciaSoftwarePorNumeroSerie(String numeroSerie) {
+        Optional<LicenciaSoftware> licenciaSoftwareOptional = licenciaSoftwareRepository.findByNumeroSerieAndEliminadaTrue(numeroSerie);
+        licenciaSoftwareOptional.ifPresent(licenciaSoftware -> {
+            licenciaSoftware.setEliminada(false);
+            licenciaSoftwareRepository.save(licenciaSoftware);
+        });
+        String mensaje = licenciaSoftwareOptional.isPresent() ? "LicenciaSoftware recuperada correctamente." : "No se encontró LicenciaSoftware eliminada con el número de serie proporcionado.";
+        return new MensajeDTO(mensaje);
+    }
+    public Optional<LicenciaSoftware> buscarPorNumeroSerie(String numeroSerie) {
+        return licenciaSoftwareRepository.findByNumeroSerieAndEliminadaFalse(numeroSerie);
+    }
+
+}
 
